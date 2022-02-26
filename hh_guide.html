@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>HH guide (version 0.4 beta) </title>
+<!-- hh.py configuration 
+sourcefile : hh_guide.hh
+outputfile : hh_guide.html
+toc : 2
+h1 : 0
+numbers : 1
+includes : 3
+x3d : 1
+css : default
+katex : 1
+highlight : 1
+highlight-css : github.min.css
+dir : ltr
+lang : en
+class : hh
+view : 0
+-->
+<style>
+    div.header {font-size: 1.6rem;
+            padding: 20px;}
+    .whenprint {display: none;}
+    @media print {
+        div.whenprint {display: block;}
+        span.whenprint {display: inline;}
+        .noprint {display: none;}
+        a {color: black;}
+    }
+    div.table_of_contents {margin-left: 25px; border-left: solid 1px black; padding: 5px;}
+    div.table_of_contents  > div > a {text-decoration: none; color: black; font-size: 1.3rem;}
+    div.table_of_contents  > div > a:hover {background-color: silver; color: white; }
+    div.table_of_contents  > div  a.H_level_2 {margin-left: 12px;}
+    div.table_of_contents  > div  a.H_level_3 {margin-left: 24px;}
+    div.table_of_contents  > div  a.H_level_4 {margin-left: 36px;}
+    div.table_of_contents  > div  a.H_level_5 {margin-left: 48px;}
+    </style>
+    <link rel="stylesheet" href="../../css/hh_basic.css" >
+<link rel="schema.dc" href="http://purl.org/dc/elements/1.1/">
+<meta name="dc.title" content="HH guide (version 0.4 beta)" />
+<meta name="dc.description" content="HH ('HaHa') is a markup language that may be not so useful. It is  based on the assumption that the user knows how HTML works (elements, attributes, ...) and  does not want to spend much effort in learning other markup languages. That's 0.074 %   of the  world population. Less is more  .  The HH-reader hh.py  reads  HH-source and produces valid HTML5. Batteries included: automatic numbering of headers and footnotes,  metadata extraction from content, printer-friendly url-list, math, highlighting, x3d, ..." />
+<meta name="dc.creator" content="(wdj)" />
+<meta name="dc.date" content="2-22-2022" />
+<meta name="dc.language" content="en" />
+<meta name="dc.rights" content="Creative Commons Licence CC BY 4.0" />
+<meta name="dc.format" content="HTML" />
+<meta name="dc.identifier" content="hh_guide.hh" />
+<script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script>
+<link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'>
+<!-- webfontloader --><script>
+  window.WebFontConfig = {
+    custom: {
+      families: ['KaTeX_AMS', 'KaTeX_Caligraphic:n4,n7', 'KaTeX_Fraktur:n4,n7',
+        'KaTeX_Main:n4,n7,i4,i7', 'KaTeX_Math:i4,i7', 'KaTeX_Script',
+        'KaTeX_SansSerif:n4,n7,i4', 'KaTeX_Size1', 'KaTeX_Size2', 'KaTeX_Size3',
+        'KaTeX_Size4', 'KaTeX_Typewriter'],
+    },
+  };
+</script><script defer src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // https://katex.org/docs/autorender.html
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+             {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+       });
+    });
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script><script>hljs.highlightAll();</script>
+</head>
+<body class='hh'>
+ <h1 >HH guide (version 0.4 beta)</h1> 
+ 
+ <p>HH ('HaHa') is a markup language that may be not so useful. It is 
+ based on the assumption that the user knows how HTML works (elements, attributes, ...) and 
+ does not want to spend much effort in learning other markup languages. That's <b><i>0.074 %</i></b> of the 
+ world population. <i>Less is more</i> . <br> The HH-reader <a href='https://github.com/notsue/HaHa'>hh.py</a> <span class='whenprint'>(url 1)</span> reads 
+ HH-source and produces valid HTML5. Batteries included: automatic numbering of headers and footnotes, 
+ metadata extraction from content, printer-friendly url-list, math, highlighting, x3d, ...</p> 
+ 
+ 
+ <table class='metadata'>
+ <tr>
+ <td>(wdj)</td> 
+ <td>2-22-2022</td> 
+ <td><a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Licence CC BY 4.0</a> <span class='whenprint'>(url 2)</span></td> 
+</tr> 
+</table> 
+ 
+ <div class='header'>Contents</div> 
+ 
+ <div class='table_of_contents'>
+<div><a href='#section_1' class='H_level_2' ><span alt='section_1'></span><span class="number">1</span> Basic rules</a></div>
+<div><a href='#section_2' class='H_level_2' ><span alt='section_2'></span><span class="number">2</span> At your service</a></div>
+<div><a href='#section_3' class='H_level_2' ><span alt='section_3'></span><span class="number">3</span> Python script hh.py</a></div>
+</div>
+ 
+ 
+ <h2 title='section_1' class='H_level_2' ><span id='section_1'></span><span class="number">1</span> Basic rules</h2> 
+ 
+  
+ 
+ <p>Opening tag: <b>&lt;p&gt;</b> is reduced to <b>&lt;p</b></p> 
+ <p>The closing tag can be a nameless <b>&gt;</b></p> 
+ <p>Attributes in <b>&lt;p class="red" id="example"&gt;</b> are reduced to <b>&lt;p,class=red,id=example</b></p> 
+ <p>Some attribute-names have a short alternative:</p> 
+ 
+ <ul>
+ <li><b>c=</b> equals class=</li> 
+ <li><b>i=</b> equals id=</li> 
+ <li><b>h=</b> equals href=</li> 
+ <li><b>s=</b> equals src=</li> 
+ <li><b>a=</b> equals alt=</li> 
+ <li><b>t=</b> equals title=</li> 
+ <li><b>l=</b> equals lang=</li> 
+</ul> 
+ 
+ <p>Our example becomes: <b>&lt;p,c=red,i=example</b></p> 
+ 
+ <p class='test_test test'>If the value of an attribute contains multiple words, the whitespaces are replaced by underscore <b>_</b>. 
+ For example: <b>&lt;p,c=warning_not_important</b> creates <b>&lt;p class="warning not important"&gt;.</b> If an underscore 
+ is part of the attribute-value, use escape <code>\_</code>. An equal-sign needs te be escaped as well: <code>\=</code>.</p> 
+ 
+ <p>Tag-names and attribute-names should be written in <b>smallcase</b> characters.</p> 
+ <p>Boolean attributes are inserted as for example <b>...,async=,...</b> (equal sign, but no value).</p> 
+ 
+ <p>Empty elements? <b>&lt;br &gt;</b> Simple.</p> 
+ <p>To write &lt; or &gt; as regular content use the <b>escape</b> sign: \&lt; , \&gt; .</p> 
+ <p>To summarize: the opening of an element (opening tag with attributes) is <b>one 'word' without whitespace.</b></p> 
+ 
+ <h3 title='section_1_1' class='H_level_3' ><span id='section_1_1'></span><span class="number">1.1</span> Anonymous tags and attributes</h3> 
+ 
+ <p>In some cases the opening tag needs no name:</p> 
+ 
+ <p>The anonymous opening tag &lt; is interpreted as:</p> 
+ 
+ <ul>
+ <li>a &lt;li if the element is a child of &lt;ul or &lt;ol</li> 
+ <li>a &lt;td if the element is a child of &lt;tr</li> 
+ <li>a &lt;p in all other contexts</li> 
+</ul> 
+ 
+ <p>There are also some anonymous attributes:</p> 
+ 
+ <ul>
+ <li><code>,http://demo.org</code> becomes <code>href="http://demo.org</code> when used in element <code>a</code> , as in <code>&lt;a,http://demo.org</code></li> 
+ <li><code>,demo-picture.png</code> becomes <code>src="demo-picuture.png"</code> when used in element <code>img</code> , as in <code>&lt;img,demo-picture.png</code></li> 
+ <li><code>,red</code> becomes <code>class="red"</code> in all other cases</li> 
+</ul> 
+ 
+ <p>Anonymous attributes can be combined with other (short) attributes as in &lt;img,demo.png,a=nice_picture</p> 
+ <p>Anonymous attributes can be used in anonymous tags.</p> 
+ 
+ <h3 title='section_1_2' class='H_level_3' ><span id='section_1_2'></span><span class="number">1.2</span> More on the closing tag</h3> 
+ 
+ <p>It is allowed to use the name of the element in the closing tag, for example <b>div&gt;</b> . It is not a bad habit 
+ to use this option when there is a lot of (complex) content between the opening and closing tag. Some 
+ favorites: <b>table&gt;, ol&gt;</b> and <b>ul&gt;, section&gt;, ...</b> In fact, it facilitates the setting 
+ of 'folding'-delimeters in editors like Notepad++.</p> 
+ 
+ <p>Although a closing &gt; or (for example) div&gt; should in principle be a separate word (preceded 
+ and followed by whitespace), following habits are tolerated:</p> 
+ <ol>
+ <li>a string with multiple closing tags, like: <b>&gt;&gt;&gt;</b> A good hh-reader should split them up 
+ in seperate &gt;</li> 
+ <li>a punctuation which sticks to and follows &gt; or (for example) div&gt; , like in <b>&gt;?</b> or <b>&gt;.</b></li> 
+ <li>closing and opening tag sticking together, like in <b>&lt;b bold &gt;&lt;i italic &gt;&lt;b bold &gt;</b>. This 
+ produces: <b>bold</b><i>italic</i><b>bold</b>.</li> 
+</ol> 
+ 
+ <p>There's a limit: do not combine option 1 with others. Do not apply 2 in de middle of a sticking 3.</p> 
+ 
+ <h3 title='section_1_3' class='H_level_3' ><span id='section_1_3'></span><span class="number">1.3</span> HTML, SVG, script- and pre-elements</h3> 
+ 
+ <p>Users can insert HTML, SVG, script-elements and pre-elements, using delimeters which instruct 
+ the parser to <b>copy as-is</b> all the lines between them. The delimeters start with an exclamation mark, 
+ followed by at least five hyphens: !----- <br> These tokens should be inserted at the beginning of a new line.</p> 
+ 
+ <p>Example:</p> 
+ <pre>
+    
+    &lt;pre &lt;code,language-python
+    !------------------
+        class Element():
+            def __init__(self, tag="", parent=None):
+                self.parent = parent
+    !------------------
+    &gt; &gt;
+</pre> 
+ 
+ <p>That's it for the basics.</p> 
+ 
+ <h2 title='section_2' class='H_level_2' ><span id='section_2'></span><span class="number">2</span> At your service</h2> 
+ 
+ <h3 title='section_2_1' class='H_level_3' ><span id='section_2_1'></span><span class="number">2.1</span> User-defined tags</h3> 
+ 
+  
+  
+  
+ 
+ <p>It happens that an author has to use the same tag with certain attributes and values regularly.</p> 
+ <p>If for example we often use <code>&lt;code,c=language-python...</code> we can reduce this 
+ to <code>&lt;PY ...</code> if we have defined the PY-element as a replacement for <code>&lt;code,c=language-python</code>.</p> 
+ <p>The definition is made with: <code>&lt;PY:=code,c=language-python &gt;</code> , of course before it's first use in the text.</p> 
+ <p>This 'element' instructs the parser to replace <i>'PY'</i> with <i>'code,c=language-python'</i>.</p> 
+ <p>The use of such a 'PY' is demonstrated in following pre-element (python-code is colored with <a href='https://highlightjs.org/'>highlight.js</a> <span class='whenprint'>(url 3)</span> ):</p> 
+ 
+ <pre><code class='language-python'>
+     # demo.hh 2 demo.html
+    
+    import sys
+
+    sys.path.append('../../')
+    import hh
+
+    config = {'sourcefile':'demo.hh', 'outputfile':None, 'toc':2, 'h1':0, 'numbers': 1, 'includes': 3 , 
+              'css':'default', 'katex':1, 'highlight': 1, 'dir':'ltr', 'lang':'en', 'class': 'hh', 'view': False}
+    
+    doc = hh.Document(config)
+    print(doc.dublin_core['dc.title'])
+    print('DONE')</code></pre> 
+ 
+ <p>Another example. When a table uses td-elements where an attribute needs to be set to certain values. For example, in a table 
+ with Greek text and English translations, we have <code>&lt;td,lang=el</code> and <code>&lt;td,lang=en</code></p> 
+ 
+ <p>These can be replaced with <code>&lt;G</code> and <code>&lt;E</code> respectively, using following definitions:</p> 
+ 
+ <p><code>&lt;G:=td,lang=el &gt;</code></p> 
+ <p><code>&lt;E:=td,lang=en &gt;</code></p> 
+ 
+ <p>Following table uses these user-defined elements:</p> 
+ 
+ <table>
+ <tr><th>Greek</th> <th>English</th></tr> 
+ <tr><td lang='el'>Ἐπίκουρος</td> <td lang='en'>Epicurus</td></tr> 
+ <tr><td lang='el'>Ἕρμαρχος</td> <td lang='en'>Hermarchus or Hermarch</td></tr> 
+</table> 
+ 
+ <p>We use capital characters for the user-defined tags, in order not to intervene with the regular tags (always smallcase). 
+ Do not use names starting with 'SET' or 'GET'. These are used for footnote e.a.</p> 
+ 
+ <p>Question. If we have <code>&lt;PY:=code,c=language-python &gt;</code>, the class of PY (code) is set. But can I add more attributes 
+ while using PY. Yes. This works: <code>&lt;PY,i=script-A</code>. It will create <code>&lt;code class='language-python' id='script-A'&gt;</code>. Demo:</p> 
+ 
+ <p><code class='language-python' id='script-A'>This code tag has id-value 'script-A'</code>.</p> 
+ 
+ <h3 title='section_2_2' class='H_level_3' ><span id='section_2_2'></span><span class="number">2.2</span> Comments</h3> 
+ 
+ <p>It is possible to include comments, that is text which should be ignored by the reader-script and leaves 
+ no traces in the html-source</p> 
+ 
+ <p>As in html you place a comment between <code>&lt;!--</code> and <code>--&gt;</code>. However, the opening 'tag' should appear at the 
+ beginning of a new line, while the closing 'tag' should be the last 'word' in a line.</p> 
+ 
+ <p>This can be used to <i>'comment out'</i> part of the text.</p> 
+ 
+ <p>If one wishes to insert comment in the html-source, use <code>!---------------</code></p> 
+ 
+ <h3 title='section_2_3' class='H_level_3' ><span id='section_2_3'></span><span class="number">2.3</span> Includes</h3> 
+ 
+ <p>We can build one HTML-document from multiple source-files, using the <code>&lt;INCLUDE</code> element. In your main 
+ source-file write <code>&lt;INCLUDE:chapter1.hh &gt;</code> and the content of <code>chapter1.hh</code> will be parsed 
+ and inserted on that spot. Obviously, the hh-reader-scripts should be launched with a source-file that serves as the 
+ main hh-source. One <i>include</i> (say a chapter) can call another include (say a section).</p> 
+ 
+ <p>There is a protection against circular includes (A.txt including B.txt and B.txt including A.txt). The hh-reader 
+ produces a warning at a certain level (include-depth), which is by default 4. You can choose: continue 
+ or not. See below: usage.</p> 
+ 
+ 
+ <h3 title='section_2_4' class='H_level_3' ><span id='section_2_4'></span><span class="number">2.4</span> Automatic Numbering of elements (h1), h2, ...</h3> 
+ 
+ <p>There are two options:</p> 
+ 
+ <ol>
+ <li>h1-elements are included in numbering <code>(config['h1'] == True)</code></li> 
+ <li>h1-elements are not included <code>(config['h1'] == False)</code></li> 
+</ol> 
+ 
+ <p>When option 2 is set in configuration (see below): all h2, h3, h4, h5 and h6 elements 
+ get an id, for example: id='section_2_1' if it is the first h3 under the second h2.</p> 
+ <p>When option 1 is selected, the same h3 might have id="section_1_2_1", if found under the first h1.</p> 
+ 
+ <p>Another couple of options</p> 
+ 
+ <ol>
+ <li>Numbers are visible for the reader of your webpage <code>(config['numbers'] == True)</code></li> 
+ <li>Numbers are not visible for the reader of your webpage <code>(config['numbers'] == False)</code></li> 
+</ol> 
+ 
+ <p>True or False: the id's are always there as a href-target.</p> 
+ 
+ <h3 title='section_2_5' class='H_level_3' ><span id='section_2_5'></span><span class="number">2.5</span> Table of contents</h3> 
+ 
+ <p>Use the empty element <code>&lt;TOC &gt;</code> to mark the position of the table of contents in the document.</p> 
+ 
+ <p>Obviously, the contentlist will follow the options concerning visual numbering and inclusion of h1.</p> 
+ 
+ <p>If <code>config['toc'] == 2</code> the table will contain headers upto level h2.</p> 
+ <p><code>config['toc']</code> has value 1 upto 6 or ... 0 (zero) which results in no table at all (with or without &lt;TOC &gt;).</p> 
+ 
+ <h3 title='section_2_6' class='H_level_3' ><span id='section_2_6'></span><span class="number">2.6</span> Footnotes: automatic numbering</h3> 
+ 
+ <p>A footnote example <span id='footnote_backlink_about' class='footnote'><a href='#footnote_about'> [1]</a></span> and a second footnote <span id='footnote_backlink_second' class='footnote'><a href='#footnote_second'> [2]</a></span> .</p> 
+ 
+ 
+ 
+ 
+ 
+ <p>The content of a footnote is wrapped in an element with tagname <code>&lt;SETF</code> .</p> 
+ <p>Each footnote has a label, for example <code>&lt;SETF:labelx</code> .</p> 
+ <p>In the text we create a link to this footnote with <code>&lt;GETF:labelx &gt;</code></p> 
+ <p>The hh-reader inserts a number at GETF, and the content of a SETF with the same 
+ label and number appears at the bottom of the html-page. The labels are used to create the 
+ links and backlinks.</p> 
+ <p>The SETF-elements can be inserted anywhere in the hh-source, after or before the GETF-element 
+ with the same label.</p> 
+ <p>We can refer multiple times to the same footnote, repeatedly using the same label, like in (see footnote 
+ <span class='footnote'><a href='#footnote_second'> [2]</a></span> ) The backlink however refers to the first use of the footnote. 
+ We can use an id only once. So far we have valid HTML5 at WC3's <a href='https://html5.validator.nu/'>nu validator</a> <span class='whenprint'>(url 5)</span></p> 
+ 
+ <p>You should indicate if and where the footnotes should appear in the html-file. Simply insert the empty 
+ element <code>&lt;NOTES &gt;</code> somewhere near the end of your main sourcefile.</p> 
+ 
+ <p>If there are multiple <code>&lt;NOTES &gt;</code> in a hh-file (perhaps inserted by one or more <code>&lt;INCLUDE's</code>, 
+ then only the last <code>&lt;NOTES &gt;</code> in the complete source will be used as location for the footnotes.</p> 
+ 
+ <h3 title='section_2_7' class='H_level_3' ><span id='section_2_7'></span><span class="number">2.7</span> Labeled References</h3> 
+ 
+ <p>For references one can create a seperate list where the items are labeled</p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ <p>A paragraph with a reference <span id='backlink_Parrot_1999' class='reference'><a href='#reference_Parrot_1999'> [Parrot 1999]</a></span></p> 
+ <p>Another paragraph with the second second reference <span id='backlink_Parrot_2009' class='reference'><a href='#reference_Parrot_2009'> [Parrot 2009]</a></span></p> 
+ 
+ <p>You should indicate if and where the footnotes should appear in the html-file. Simply insert the 
+ element <code>&lt;REFS &gt;</code> somewhere near the end of your main sourcefile.</p> 
+ 
+ <p>You can use &lt;INCLUDE to load a database with all your favorite references as &lt;SETR's, even if 
+ you use only a few of them. Only the used references will pop at the bottom of the html-file.</p> 
+ 
+ <p>If there are multiple <code>&lt;REFS &gt;</code> in a hh-file (perhaps inserted by one or more <code>&lt;INCLUDE's</code>, 
+ then only the last <code>&lt;REFS &gt;</code> in the complete source will be used as location for the footnotes.</p> 
+ 
+ 
+ <h3 title='section_2_8' class='H_level_3' ><span id='section_2_8'></span><span class="number">2.8</span> Metadata</h3> 
+ 
+ <p>Search engines look for metadata in de head-element. With HaHa, it is easy to provide 
+ metadata in an international and widely used standard format: the <b>Dublin Core Metadata Element Set</b> (DCMS)</p> 
+ <p><a href='https://en.wikipedia.org/wiki/Dublin Core'>WikiPedia's 'Dublin Core' page</a> <span class='whenprint'>(url 6)</span> is a good/sufficient guide.</p> 
+ 
+ <ol>
+ <li>dc.title – "A name given to the resource".</li> 
+ <li>dc.creator – "An entity primarily responsible for making the resource" (author).</li> 
+ <li>dc.contributor – "An entity responsible for making contributions to the resource".</li> 
+ <li>dc.publisher – "An entity responsible for making the resource available".</li> 
+ <li>dc.date – "A point or period of time associated with an event in the lifecycle of the resource".</li> 
+ <li>dc.description – "An account of the resource" (abstract).</li> 
+ <li>dc.subject – "The topic of the resource (keywords)".</li> 
+ <li>dc.coverage – "The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant".</li> 
+ <li>dc.format – "The file format, physical medium, or dimensions of the resource".</li> 
+ <li>dc.identifier – "An unambiguous reference to the resource within a given context" (URL, ISBN).</li> 
+ <li>dc.language – "A language of the resource" (ISO code).</li> 
+ <li>dc.relation – "A related resource".</li> 
+ <li>dc.rights – "Information about rights held in and over the resource".</li> 
+ <li>dc.source – "A related resource from which the described resource is derived".</li> 
+ <li>dc.type – "The nature or genre of the resource".</li> 
+</ol> 
+ 
+ <p>In HaHa, you do not have te create seperate elements with metadata. You can reuse the content.</p> 
+ 
+ <p>This page starts with: <code>&lt;h1,dc.title HH guide (version 0.4 beta) &gt;</code></p> 
+ 
+ <p>The title is saved in a metadata-dictionary and used in meta-elements (and in this case 
+ the title-element as well).</p> 
+ 
+ <p>Other example. The small, table on top of this page, has hh-markup:</p> 
+ 
+ <pre><code>
+ &lt;,dc.creator (wdj) &gt;
+&lt;,dc.date 2-22-2022 &gt;
+&lt;,dc.rights &lt;a,https://creativecommons.org/licenses/by/4.0/ Creative Commons Licence CC BY 4.0 &gt; &gt; </code></pre> 
+ 
+ <p>You may wonder: what about the inline markup of our content? It is removed. The stuff in the metadata-dict is plain text.</p> 
+ 
+ <p>HTML validators have problems with metadata, although we follow <a href='https://html.spec.whatwg.org/dev/semantics.html'>HTML5 standards</a> <span class='whenprint'>(url 7)</span> (follow 
+ link to MetadataExtensions page). Our 
+ main motivation, when using Dublin Core: <a href='https://en.wikipedia.org/wiki/Open Archives Initiative'>Open Archives Initiative</a> <span class='whenprint'>(url 8)</span> 
+ and <a href='https://doaj.org/docs/oai-pmh/'>DOAJ (Directory of Open Access Journals)</a> <span class='whenprint'>(url 9)</span></p> 
+ 
+ 
+ <h3 title='section_2_9' class='H_level_3' ><span id='section_2_9'></span><span class="number">2.9</span> Printing: URL's</h3> 
+ 
+ <p>HaHa provides facilities to print the url's of used links at the end of a webpage. This list 
+ does not show up on screen, but when printing of page is requested, the list shows up (unless the css 
+ is altered).</p> 
+ 
+ <p>The links in the list are numbered and a reference number, like (url 5), appears after the link in the text.</p> 
+ 
+ <p>While printing, backlinks are made invisible with css.</p> 
+ 
+ <h3 title='section_2_10' class='H_level_3' ><span id='section_2_10'></span><span class="number">2.10</span> Math and 3D</h3> 
+ 
+ <p>Things like:</p> 
+ 
+ <p>$f(x) = \int_{-\infty}^\infty \widehat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi$</p> 
+ 
+ <p>We use <a href='https://katex.org/'>KaTeX</a> <span class='whenprint'>(url 10)</span> with the <a href='https://katex.org/docs/autorender.html'>auto-render extension</a> <span class='whenprint'>(url 11)</span></p> 
+ 
+ <p>An x3d demo. You can interact with mouse (left: rotate, right: zoom). HTML-Validators have problems with x3d. 
+ Nevver mind: browsers (the real validators) have no problems with x3d.</p> 
+ 
+ <x3d width='500px' height='400px'> 
+	   <scene> 
+        
+		<shape> 
+		   <appearance> 
+			 <Material ambientIntensity='0.4' diffuseColor='0.8,0,0' emissiveColor='0,0,0' metadata='X3DMetadataObject' shininess='0.2' specularColor='0,0,0' transparency='0.5' ></Material> 
+		   </appearance> 
+		   <box></box> 
+		</shape> 
+		<transform translation='-3 0 0'> 
+		  <shape> 
+			 <appearance> 
+			   <material diffuseColor='0 1 0'></material> 
+			 </appearance> 
+			 <cone></cone> 
+		  </shape> 
+		</transform> 
+		<transform translation='3 0 0'> 
+		  <shape> 
+			 <appearance> 
+			   <material diffuseColor='0 0 1'></material> 
+			 </appearance> 
+			 <sphere></sphere> 
+		  </shape> 
+		</transform> 
+	   </scene> 
+	</x3d> 
+
+ <h2 title='section_3' class='H_level_2' ><span id='section_3'></span><span class="number">3</span> Python script hh.py</h2> 
+ 
+ <h3 title='section_3_1' class='H_level_3' ><span id='section_3_1'></span><span class="number">3.1</span> Usage</h3> 
+ 
+ <p>Download zip-file at <a href='https://github.com/notsue/HaHa'>github.com/notsue/HaHa</a> <span class='whenprint'>(url 12)</span> (press red code-button, and select 
+ 'download zip')</p> 
+ 
+ <p>For practical learning and experimenting the file <code>docs/hh_demo/hh_demo.hh</code> can serve as a good start.</p> 
+ 
+ <p>In a terminal window move to the directory <code>docs/hh_demo/</code></p> 
+ 
+ <p>Try the script: <code>&gt;python ../../hh.py --version</code></p> 
+ 
+ <p>Then: <code>&gt;python ../../hh.py -h</code></p> 
+ 
+ <p>If this produces normal answers, you can try to convert <code>demo.hh</code> into <code>demo.html</code> yourself:</p> 
+ 
+ <p><code>&gt;python ../../hh.py demo.hh -K -H</code></p> 
+ 
+ <p>Javascripts: The option -K activates Katex, the option -H activates Highlight (you should be online)</p> 
+ 
+ <p>The html-output <code>demo.html</code> is stored in the same directory</p> 
+ 
+ <p>If you add option -v to the command: the script will ask if you want to view the html in your favorite browser.</p> 
+ 
+ <p>The option -n activates the numbering of titles.</p> 
+ 
+ <p>Check the metadata in the html-output. Observe the effect of the default css on printing.</p> 
+ 
+ <p>Observe that your command-options are stored in a comment at the beginning of the html-file.</p> 
+ 
+ <p><code>docs/hh_demo/demo.py</code> demonstrates how to call hh.py from another script. It allows us to reduce command to:</p> 
+ 
+ <p><code>&gt;python demo.py</code></p> 
+ 
+ <p>Send comments, tips, wishes and questions to notsue at protonmail dot com . Do not compare with markdown, ReST, etc. 
+ HaHa is not another lightweight markup. It's 'dirty' HTML. As dirty as possible.</p> 
+ 
+ 
+ <h3 title='section_3_2' class='H_level_3' ><span id='section_3_2'></span><span class="number">3.2</span> What's next</h3> 
+ 
+ <p>With version 0.4 the markup became stable. This will not change in future versions. Perhaps more bells and 
+ whistles are added, but that will not harm the compatibility of older HaHa-source.</p> 
+ 
+ <p>The handling of errors in the hh-source could be better. A clever user should however exploit the INCLUDE-mechanism 
+ which provides a means to test a hh-source piece by piece. When all parts are ok, you can cut and past them in one file.</p> 
+ 
+ <h3 title='section_3_3' class='H_level_3' ><span id='section_3_3'></span><span class="number">3.3</span> Adaptations</h3> 
+ 
+ <p>You can change the script in order to include more or other css and javascript.</p> 
+ 
+ <p>Whatever: do not touch the <code>class Element</code>.</p> 
+ 
+ <p>In the class Document you should not touch the function <code>read_include()</code></p> 
+ 
+ <p>We have inserted the marker #OPTION: in places where changes might contribute to your local needs.</p> 
+ 
+ 
+ <div class='header'>Notes</div> 
+ 
+ <div class="footnotes">
+<p class="footnote"><span class="footnote_number">[1]</span> <span id='footnote_about' >Content of first footnote</span> <a class='noprint' href='#footnote_backlink_about'> &#11149; </a> </p>
+<p class="footnote"><span class="footnote_number">[2]</span> <span id='footnote_second' >Content of second footnote with <b>bold text</b> and a <a href='http://test.org'>link</a> <span class='whenprint'>(url 4)</span></span> <a class='noprint' href='#footnote_backlink_second'> &#11149; </a> </p>
+</div>
+ 
+ 
+ <div class='header'>References</div> 
+ 
+ <div class="references">
+<p class="reference"><span class="reference_label">[Parrot 1999]</span> <span id='reference_Parrot_1999' >Parrot D. (1999) <i>Spam, Eggs and Spam</i> , in <span id='backlink_Parrot_2012' class='reference'><a href='#reference_Parrot_2012'> [Parrot 2012]</a></span></span> <a class='noprint' href='#backlink_Parrot_1999'> &#11149; </a> </p>
+<p class="reference"><span class="reference_label">[Parrot 2009]</span> <span id='reference_Parrot_2009' >Parrot D. (2009) <i>More Spam and Eggs (and Spam)</i> , PSF</span> <a class='noprint' href='#backlink_Parrot_2009'> &#11149; </a> </p>
+<p class="reference"><span class="reference_label">[Parrot 2012]</span> <span id='reference_Parrot_2012' >Parrot D. (2012) <i>Collected Works</i> , PSF</span> <a class='noprint' href='#backlink_Parrot_2012'> &#11149; </a> </p>
+</div>
+ 
+ 
+ 
+<div class='urls whenprint'>
+<div class='header'>URL's</div>
+<p class="url"><span class="url_number">[1]</span> https://github.com/notsue/HaHa</p>
+<p class="url"><span class="url_number">[2]</span> https://creativecommons.org/licenses/by/4.0/</p>
+<p class="url"><span class="url_number">[3]</span> https://highlightjs.org/</p>
+<p class="url"><span class="url_number">[4]</span> http://test.org</p>
+<p class="url"><span class="url_number">[5]</span> https://html5.validator.nu/</p>
+<p class="url"><span class="url_number">[6]</span> https://en.wikipedia.org/wiki/Dublin Core</p>
+<p class="url"><span class="url_number">[7]</span> https://html.spec.whatwg.org/dev/semantics.html</p>
+<p class="url"><span class="url_number">[8]</span> https://en.wikipedia.org/wiki/Open Archives Initiative</p>
+<p class="url"><span class="url_number">[9]</span> https://doaj.org/docs/oai-pmh/</p>
+<p class="url"><span class="url_number">[10]</span> https://katex.org/</p>
+<p class="url"><span class="url_number">[11]</span> https://katex.org/docs/autorender.html</p>
+<p class="url"><span class="url_number">[12]</span> https://github.com/notsue/HaHa</p>
+</div>
+</body>
+</html>
