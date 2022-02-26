@@ -31,3 +31,5 @@ div.table_of_contents > div > a {color: white;}
 div.table_of_contents > div > a:link {color: white;}
 div.table_of_contents > div > a:hover {background-color: black; color: silver;}
 }
+
+label {border-top: solid 1px; border-left: solid 1px; } 
