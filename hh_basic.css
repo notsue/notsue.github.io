@@ -1,0 +1,80 @@
+
+body {font-family: serif;
+      font-size: 15px;
+      width: 60%;}
+      
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+th, td {padding: 4px;}
+th {text-align: center;}
+tr:hover {background-color: coral;}
+
+h1, h2, h3, h4, h5, h6, div.header {font-family: serif;}
+h1 {font-size: 2.2rem;}
+h2 {font-size: 2.0rem;}
+h3 {font-size: 1.8rem;}
+h4 {font-size: 1.6rem;}
+h5 {font-size: 1.4rem;}
+h6 {font-size: 1.2rem;}
+
+.number {color: rgb(150,150,150);}
+.number:hover {color: white;}
+
+div.header {font-size: 1.6rem;
+            padding: 20px;}
+            
+
+
+/* TABLE OF CONTENTS
+<div class='table_of_contents'>
+<div><a href='#section_1'><span class="H_level_1">1</span> Basic rules </a></div>
+<div><a href='#section_1_1'><span class="H_level_2">1.1</span> Anonymous tags and attributes </a></div>
+...
+</div>
+*/
+
+.whenprint {display: none;}
+
+@media print {
+div.whenprint {display: block;}
+span.whenprint {display: inline;}
+.noprint {display: none;}
+a {color: black;}
+}
+
+div.table_of_contents {margin-left: 25px;
+                       border-left: solid 1px black;
+                       padding: 5px;}
+div.table_of_contents  > div > a {text-decoration: none;
+                                  color: black;
+                                  font-size: 1.2rem;
+                                  font-family: serif;}
+div.table_of_contents  > div > a:hover {background-color: silver;
+                                        color: white;
+                                        }
+                                        
+div.table_of_contents  > div  a.H_level_2 {margin-left: 12px;}
+div.table_of_contents  > div  a.H_level_3 {margin-left: 24px;}
+div.table_of_contents  > div  a.H_level_4 {margin-left: 36px;}
+div.table_of_contents  > div  a.H_level_5 {margin-left: 48px;}
+
+pre { overflow-x: auto; }
+code {font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", 
+                   "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", 
+                   "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;}
+
+span.footnote > a {text-decoration: none;
+                   color: black;}
+span.footnote > a:hover {color: white;
+                         background-color: grey;}
+                         
+p.footnote > a {text-decoration: none;
+                margin-left: 20px;}
+p.footnote > a:hover {color: white;
+                      background-color: grey;}
+                      
+table.metadata > tr > td {padding: 20px; text-align: center;}
+table.metadata > tbody > tr > td {padding: 20px; text-align: center;}
