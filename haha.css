@@ -1,0 +1,60 @@
+#haha-header > nav > a,
+#haha-header > nav > a:visited {
+  font-size: 1rem;
+  font-family: Roboto, Helvetica, sans-serif;
+  margin: 0 0.5rem 1rem 0.5rem;
+  color: black;
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+  background: none;
+}
+
+#haha-header > nav a:hover {
+  filter: brightness(1.4);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+	#haha-header > nav > a,
+	#haha-header > nav > a:visited { color: white;}
+}
+
+/* Reduce nav side on mobile */
+@media only screen and (max-width: 720px) {
+  header > nav a {
+    padding: 0;
+    text-decoration: underline;
+    line-height: 1;
+  }
+}
+
+/* Tufte sidenote and magin note labels */
+label.margin-toggle, span.margin-toggle {border-left: solid 1px;
+					border-top: solid 1px;
+					padding-left: 2px;}
+
+/* TOC */
+
+#haha-toc {border-left: solid 1px; margin-left: 1rem;}
+#haha-toc > p > a {text-decoration: none; 
+                   background: none;}
+#haha-toc > p > a:hover {text-decoration: underline;}
+
+#haha-toc > p {margin: 0;}
+
+.haha-h1, h2 {padding-left: 0.8rem;}
+.haha-h2, h3 {padding-left: 1.6rem;}
+.haha-h3, h4 {padding-left: 2.4rem;}
+.haha-h4, h5 {padding-left: 3.2rem;}
+.haha-h5, h6 {padding-left: 4.0rem;}
+.haha-h6 {padding-left: 4.8rem;}
+	
+/* footnotes */
+#haha-footnotes  table  {border-style: none;}
+.haha-fn-item {border: none;} 
+.haha-backlink {padding-left: 4px;}
+
+
+	
