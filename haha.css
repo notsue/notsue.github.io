@@ -42,14 +42,14 @@ iframe {width: 100%;
 					margin-top: 3rem;}
 					
 #haha-iframe-links > a {text-decoration: none;
-						border: none;
-  border-radius: 5px;
-  background: var(--accent);
-  font-size: 1.5rem;
-  color: var(--bg);
-  padding: 0.7rem 0.9rem;
-  margin: 0.5rem 0;
-						}
+			border: none;
+  			border-radius: 5px;
+  			background: var(--accent);
+  			font-size: 1.5rem;
+  			color: var(--bg);
+  			padding: 0.7rem 0.9rem;
+  			margin: 0.5rem 0;
+			}
 						
 [data-title]:hover:after {
     opacity: 1;
