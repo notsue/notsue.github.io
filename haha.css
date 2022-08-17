@@ -1,0 +1,109 @@
+#haha-header > nav > a,
+#haha-header > nav > a:visited {
+  font-size: 1rem;
+  font-family: Roboto, Helvetica, sans-serif;
+  margin: 0 0.5rem 1rem 0.5rem;
+  color: black;
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  text-decoration: none;
+  background: none;
+}
+
+#haha-header > nav a:hover {
+  filter: brightness(1.4);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+	#haha-header > nav > a,
+	#haha-header > nav > a:visited { color: white;}
+}
+
+/* Reduce nav side on mobile */
+@media only screen and (max-width: 720px) {
+  header > nav a {
+    padding: 0;
+    text-decoration: underline;
+    line-height: 1;
+  }
+}
+
+/* haha-iframe-show */
+
+iframe {width: 100%;
+		height: 300px;
+		border: none;
+		border-left: 0.35rem solid var(--marked);}
+
+#haha-iframe-links {text-align:center;
+                    margin-bottom: 5px;
+					margin-top: 3rem;}
+					
+#haha-iframe-links > a {text-decoration: none;
+						border: none;
+  border-radius: 5px;
+  background: var(--accent);
+  font-size: 1.5rem;
+  color: var(--bg);
+  padding: 0.7rem 0.9rem;
+  margin: 0.5rem 0;
+						}
+						
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.2s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: var(--marked);
+    color: #111;
+    font-size: 75%;
+    position: absolute;
+    padding: 5px 5px 5px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    box-shadow: 2px 2px 5px #222222; 
+    opacity: 0;
+	border-radius: 4px;
+    /* border: 1px solid #111111; */
+    z-index: 99999;
+    visibility: hidden;
+}
+[data-title] {
+    position: relative;
+}
+
+
+/* Tufte sidenote and magin note labels */
+label.margin-toggle, span.margin-toggle {border-left: solid 1px;
+					border-top: solid 1px;
+					padding-left: 2px;
+					}
+
+/* TOC */
+
+#haha-toc {border-left: solid 1px; margin-left: 1rem;}
+#haha-toc > p > a {text-decoration: none; 
+                   background: none;}
+#haha-toc > p > a:hover {text-decoration: underline;}
+
+#haha-toc > p {margin: 0;}
+
+.haha-h1, h2 {padding-left: 0.8rem;}
+.haha-h2, h3 {padding-left: 1.6rem;}
+.haha-h3, h4 {padding-left: 2.4rem;}
+.haha-h4, h5 {padding-left: 3.2rem;}
+.haha-h5, h6 {padding-left: 4.0rem;}
+.haha-h6 {padding-left: 4.8rem;}
+	
+/* footnotes */
+#haha-footnotes  table  {border-style: none;}
+.haha-fn-item {border: none;} 
+.haha-backlink {padding-left: 4px;}
+
+
+	
