@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>HaX Guide</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="simple.css"><link rel="stylesheet" href="custom-hax.css"><meta name="dc:language" content="en">
+<meta name="dc:title" content="HaX Guide">
+<meta name="dc:creator" content="NotSue">
+<meta name="dc:date" content="2024-5-20">
+<meta name="dc:description" content="HaX is a markup-language. It supports the production of handwritten XML/HTML-documents. HaX provides shorter alternatives for regular XML-tags, reducing the keyboard input with at least 50% (HaX == Half XML). With a basic knowledge of XML/HTML-markup, it takes 30 minutes to learn using HaX. A Python script converts HaX to XML/HTML5. The HaX-parser is guided by the contents of a json-file. User can create json-files that meet specific preferences. HaX is therefore flexible. A json-file can support the creation of articles in HTML5, while other json-files may support the creation of an XML-database.">
+</head>
+<body>
+<header>
+    <nav>
+    <a href="../index.html"><img class="icon" src="home.png"> Home</a>
+    <a href="https://github.com/notsue/hax" ><svg class="icon" viewBox="0 0 32 32"><path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path></svg>GitHub</a>
+    </nav>
+    </header>
+    <main><h1 property="dc:title">HaX Guide</h1>
+
+<p class="metadata">By <span property="dc:creator">NotSue</span> (<span property="dc:date">2024-5-20</span>)
+<span class="hidden" property="dc:language">en</span></p>
+
+<div class="abstract" property="dc:description">HaX is a markup-language. It supports the production of 
+handwritten XML/HTML-documents. HaX provides shorter alternatives for regular XML-tags,
+reducing the keyboard input with at least 50% (HaX == Half XML). 
+With a basic knowledge of XML/HTML-markup, it takes 30 minutes to learn using HaX. A Python script
+converts HaX to XML/HTML5. The HaX-parser is guided by the contents of a json-file. User can create 
+json-files that meet specific preferences. HaX is therefore flexible. A json-file can support the creation
+of articles in HTML5, while other json-files may support the creation of an XML-database.</div>
+
+<h2>Introduction</h2>
+
+<p>A HaX-parser always has two inputs:</p>
+
+<ol>
+<li>A document with <strong>HaX-markup</strong></li>
+<li>A json-file with <strong>HaX-code</strong></li>
+</ol>
+
+<p>HaX-markup may produce different outputs, depending on the selected HaX-code. The 'source' of this
+document is a couple: <code>haxguide.hax </code> (markup) and  <code>article.json</code> (code)</p>
+
+<p>User can select the output-format: 'xml', 'xhtml' or 'html'. With 'html' we get HTML5 as output. 
+Which xhtml? All W3C-recommendations can be applied, but our examples produce 
+<a href="https://wiki.whatwg.org/wiki/HTML_vs._XHTML">XHTML5</a>.
+The parser produces a list of nodes, and when these nodes are
+transformed into final output, the selected format will define the XML- or HTML5-markup of 
+boolean attributes, empty (void) elements, etcetera.</p>  
+
+<h2>HaX document structure</h2>
+
+<p>Each HaX document contains one or more elements, the boundaries of which are delimited by start-tags and end-tags
+Each element has a name and may have a set of attributes. </p>
+<p>The elements, delimited by start- and end-tags, MUST nest properly within each other.</p>
+<p>HaX-markup CAN but MUST NOT have a root element. </p>
+
+<p>We compare XML/HTML-markup with HaX-markup: </p>
+
+<p>XML: <code class="language-hax">&lt;p&gt;Paragraph with &lt;strong&gt;two emphasized&lt;/strong&gt; words.&lt;/p&gt;</code></p>
+<p>HaX: <code class="language-hax">&lt;p Paragraph with &lt;strong two emphasised&gt; words.&gt;</code></p>
+
+<p>Following HaX-rules are applied:</p>
+
+<ul>
+<li><strong>End-tag: </strong> User CAN reduce all end-tags to a greater-than-character (&gt;). However, XML-markup is also okay.</li>
+<li><strong>Start-tag: </strong> The start-tag ends with whitespace (space, tab, newline) (not with &gt;).</li>
+</ul>
+
+<p>Our paragraph-example CAN have a nameless start-tag:</p>
+
+<p>HaX: <code class="language-hax">&lt; Paragraph with &lt;strong two emphasized&gt; words.&gt;</code></p>
+
+<p>If the start-tag has no explicit name, the parser consults a json-file, and may read this:</p>
+
+<pre><code class="language-hax">
+    "parent": {"ul": "li",
+               "ol": "li",
+               "menu": "li",
+               "table": "caption",
+               "tr": "td",
+               "figure": "figcaption",
+               "dl": ["dt", "dd"],
+               "-": "p"}
+</code></pre>
+
+<p>This <em>HaX-code</em> says that nameless children of ul-, ol- or menu-elements are li-elements, 
+while a nameless child of a tr-element is a td-element. The default child (parent indicated by a hyphen)
+is a p-element.</p>
+
+<p>Example (a menu):</p>
+
+<menu>
+<li>spam</li>
+<li>spam</li>
+<li><ul>
+   <li>eggs, or</li>
+   <li>more spam</li>
+   </ul></li>
+<li>and spam</li>
+</menu>
+
+<p>HaX markup:</p>
+
+<pre><code class="language-hax">
+    &lt;menu
+      &lt; spam&gt;
+      &lt; spam&gt;
+      &lt; &lt;ul 
+           &lt; eggs, or&gt;
+           &lt; more spam&gt;
+         &gt;
+      &gt;
+      &lt; and spam&gt;
+    &gt;
+</code></pre>
+
+<p>When you have to create a complicated list (many nested lists, a lot of inline elements)
+it may help to use some XML-style end-tags (<code>&lt;/ul&gt; </code>) to keep track of the overall structure.
+Line indents also help, but they have no impact on the parser (who stores all tabs and newlines in text-nodes).</p>
+
+<p>The HaX-code also says that the nameless children of a dl-element alternate, 
+between two meanings: 'dt' and 'dd'. Such a list can be longer (alternating over 3, 4 or more elements). </p> 
+
+<dl>
+<dt>One</dt>
+<dd>Definition of one</dd>
+<dt>Two</dt>
+<dd>Definition of two</dd>
+</dl> 
+
+<pre><code class="language-hax">
+    &lt;dl
+      &lt; One&gt;
+      &lt; Definition of one&gt;
+      &lt; Two&gt;
+      &lt; Definition of two&gt;
+    &gt; 
+</code></pre>
+
+<p>Next example uses an alias:</p>
+
+<p>HaX: <code class="language-hax">&lt; Paragraph with &lt;S two emphasized&gt; words.&gt;</code></p>
+
+<p>We've now replaced 'strong' with a capital 'S'. Another section in our HaX-code
+says what to do with tag-names, written in capitals.</p>
+
+<pre><code class="language-hax">
+"elementName": {"S": "strong",
+                "Q": "quotation",
+                "F": "figure",
+                "CH": ["code", {"class":"language-hax"}]},
+</code></pre>
+
+<p>The capitals CH will return <code>&lt;code class="language-hax"&gt; </code></p>
+
+<p>Capitals preceded by the escape sign \\ will return the capitals.</p>
+
+<h3>Empty elements</h3>
+
+<p><code>&lt;br&gt;</code> produces <code>&lt;br /&gt;</code>, and</p>
+<p><code>&lt;br &gt;</code> produces <code>&lt;br&gt;&lt;/br&gt;</code></p>
+
+<p>In the first case, the parser produces a node of type 'empty'. With the output-format
+(xml, xhtml, html) we decide how this node is converted into XML or HTML5.
+In the second case, the parser produces two nodes (starttag and endtag).</p> 
+
+<h3>Script-, style- and code-elements</h3>
+
+<p>Our HaX-code (article.json) contains following instructions: </p>
+
+<pre><code>
+    "skip": ["script", "style"],
+    "entities": ["code"]
+</code></pre>
+
+<p>If the parser detects a starttag with the name 'script', 'style' or 'code', he
+stops interpreting HaX-markup, until he reads &lt;//, a lower-than-sign, followed by two 
+forward slaches. </p>
+
+<p>What differentiates "skip" from "entities" is, in the latter case, the automatic replacement of &lt;, &gt; and 
+&amp; by xml-entities (&amp;lt; ...).</p>
+
+<p>In other text fragments we can use a backslash to produce XML-entitities: <code>\&lt; </code> produces <code>&amp;lt; </code> </p>
+
+<h3>Comments, cdata, declarations and processing instructions</h3>
+
+<p>XML-comments, cdata-blocks, declarations and processing instructions are copied as is.</p>
+
+<p>Anything between <code>&lt;!-- </code> and <code>--&gt; </code> is stored in a comment-node (delimeters included).</p>
+<p>Anything between <code>&lt;? </code> and <code>?&gt; </code> is stored in a pi-node (delimeters included).</p> 
+<p>Anything between <code>&lt;![CDATA[ </code> and <code>]]&gt; </code> is stored in a cdata-node (delimeters included).</p>
+<p>Anything between <code>&lt;!DOCTYPE </code> and <code>&gt; </code> is stored in a declaration-node (delimeters included).</p>
+
+<p>A declaration CAN NOT include internal DTD. A reference to an external DTD is possible.</p>
+ 
+<p>HaX-markup CAN but MUST NOT contain a prolog and/or Document Type Declaration. The parser can consume following
+markup:</p>
+
+<pre><code class="language-hax">
+    &lt;?xml version="1.0"?&gt;
+    &lt;!DOCTYPE html&gt;
+</code></pre>
+    </main>
+  <footer>
+     <p><img width="40" height="40" src="cc.svg"> <img width="40" height="40" src="by.svg"></p>
+      <p>Content on this site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International license</a></p>
+    <p>Style is managed with: <a href="https://simplecss.org/">simple.css</a> | icons from <a href="https://pictogrammers.com/">Pictogrammers</a></p>
+  </footer>
+</body>
+</html>
