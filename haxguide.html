@@ -202,6 +202,118 @@ markup:</p>
     &lt;?xml version="1.0"?&gt;
     &lt;!DOCTYPE html&gt;
 </code></pre>
+        
+<h2>Attributes</h2>
+
+<p>Again we compare XML with HaX: </p>
+
+<p>XML: <code class="language-hax">&lt;p lang="fr" class="red alert"&gt;Paragraphe en français.&lt;/p&gt;</code></p>
+<p>HaX: <code class="language-hax">&lt;p@lang=fr@class="red alert" Paragraphe en français.&gt;</code></p>
+
+<p>In HaX the attributes are separated by the @-symbol. If the value of an
+attribute contains whitespace (space, tab, newline) or punctuation marks, the value
+MUST be placed between single or double quotes. The end of the starttag is the
+first whitespace outside quotes. It's a good habbit to use quotes 
+systematicaly, when the value of an attribute is a URL or filename.</p>
+
+<p>For boolean attributes two styles are allowed:</p>
+
+<ul>
+<li><code>@async</code></li>
+<li><code>@async=''</code></li>
+</ul>
+
+<p>In our example, we can replace both attribute-names with a punctuation mark: </p> 
+
+<p>HaX: <code class="language-hax">&lt;p!fr."red alert" Paragraphe en français.&gt;</code></p>
+
+<p>The parser consults the HaX-code and reads: </p>
+
+<pre><code class="language-js">
+    "hax": {".":"class",
+            "#": "id",
+            "!": "lang",
+            "|": "property",
+            }
+</code></pre>
+
+<p>Multiple uses of same attribute do not lead to replacement of attribute-value, 
+but adds extra values (seperated by whitespace). </p>
+
+<ul>
+<li>This: <code class="language-hax">&lt;p.red.green.blue </code></li>
+<li>Produces: <code class="language-hax">&lt;p class="red green blue"&gt; </code></li>
+</ul>
+
+<p>So far we demonstrated the dot (replacing <code>class</code>) and our json-file
+shows that a <code>!</code> should produce <code>lang</code>. More symbols could be added, linking
+them to a specific attribute-name. We can for example use the backtick: <code> "`":"title"</code> . 
+But NOT a <em>colon, semicolon</em> or <em>comma</em>.</p>
+
+<p>The colon (<code class="language-hax">:</code>) is used with namespaces. HaX respects this tradition.</p>
+
+<h3>Comma and semicolon</h3>
+
+<p>The effect of a comma diffentiates with the name of the element!</p>
+
+<p>The HaX-code explains: </p>
+
+<pre><code>
+    "comma": {"a": "href",
+              "img": "src",
+              "script": "src",
+              "style": "src",
+              "button": "type",
+              "-": "title"}
+</code></pre>
+
+<p>Two examples witch produce the same output:</p>
+
+<ul>
+<li><code class="language-hax">&lt;a@href="http://example.com" A site&gt;</code></li>
+<li><code class="language-hax">&lt;a,"http://example.com" A site&gt;</code></li>
+</ul> 
+
+<p>The same mechanism is applied with the semicolon, who's interpretation
+also chabnges with the name of the element.</p>
+
+<pre><code>
+    "semicolon": {"a": "target",
+                  "img": "alt",
+                  "button": "onclick",
+                  "-": "style"},
+</code></pre>
+
+<p>Both, comma and semicolon, MUST have a default value, represented by the hyphen (-).</p>
+
+<h2>Mixing HaX and XML</h2>
+
+<p>The parser must be instructed: are starttags ending with whitespace or <code class="hax">&gt;</code>?</p>
+<p>Users can switch from one modus to the other, simply by beginning a starttag with <code class="hax">&lt;&lt;</code>, a double 
+lower-than-symbol. The new modus is active until a new double <code class="hax">&lt;&lt; </code> is used. </p>
+
+<p>Demo: </p>
+<pre><code class="language-hax">
+    &lt;p Starting in real Hax-modus (default).&gt;
+    &lt;&lt;p&gt;Switching to XML modus&gt;
+    &lt;p&gt;Still in the other modus&gt;
+    &lt;&lt;p Switched back to real HaX&lt;/p&gt;
+</code></pre>
+
+<p>Both modi allow the use of XML-endtags or a simple naked <code class="hax">&gt;</code>.</p>
+
+<h2>Entity references</h2>
+
+<p>Entity references consist of & + any of the valid HTML5 entity names + ;. 
+The document <a href="https://html" class="spec whatwg org/entities json">https://html.spec.whatwg.org/entities.json</a>
+is used as an authoritative source for the valid entity references and their corresponding code points.</p>
+
+<h2>Metadata</h2>
+
+<p><a href="https://www.dublincore.org/specifications/dublin-core/dcq-html/">Dublin Core in HTML/XHTML</a></p>
+
+
+        
     </main>
   <footer>
      <p><img width="40" height="40" src="cc.svg"> <img width="40" height="40" src="by.svg"></p>
